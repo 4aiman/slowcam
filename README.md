@@ -1,58 +1,48 @@
-# GreenCam
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4ccf5f3b-b414-4da1-bf50-97955adbd300/deploy-status)](https://greencam.netlify.app) 👈 Try it here!
+# SlowCam
 
-## 🎉🎉🎉 Version 1.0.0 is OUT now
+SlowCam is **a virtual green backdrop**. It basically replaces every thing around you by green color. So that you can use the Chroma Key filter in OBS Studio to put yourself in any other video. 
+SlowCam is powered by a machine learning technology called [Tensorflow](https://github.com/tensorflow/tfjs) and its public model [BodyPix](https://github.com/tensorflow/tfjs-models/tree/master/body-pix).
 
-The online version which is hosted on Netlify is always up to date. Latest version is `v1.0.0`. This new version gives you abitlity to control GreenCam parameters, play with it back and forth until you satisfy with GreenCam's output. Just remember, I picked the best parameters by default for you. Try it first in Chrome for the best result. At the end of home page, you'll get a generated URL, which will hide all other controller, make you a clean output for OBS. You can consume this URL in OBS Browser plugin or open in a new tab. 
+I was unable to make it work fast enough with any amount of tweaking on Ryzen 5 3600 + RTX4070.
+Maybe with a different model it'll work faster.
 
-👏 Big shout-out to [@Shahin Sorkh](https://github.com/ShahinSorkh) with their great improvemnet for GreenCam UI.
-and off course, lot of love to contributors [@Christopher Lee](https://github.com/CCInc) [@Eduard Reñé Claramunt](https://github.com/edurenye) and [@Linus Schlumberger](https://github.com/Killusions).
+| | |
+|----|----|
+|Pros|Utilizes GPU unlike many alternatives|
+|Cons| slow, hogs GPU and CPU resources|
 
-## What is GreenCam?
+Temp graphs<br>
+![image](https://github.com/4aiman/slowcam/assets/2913210/35471699-5c6a-4b69-b327-62241a3bf187)<br>
+![image](https://github.com/4aiman/slowcam/assets/2913210/b83b87a8-633a-4a65-ae4d-f90da770778f) CPU temp 
+![image](https://github.com/4aiman/slowcam/assets/2913210/49459b33-39e5-4cd5-943b-90bf9c9fb284) NVME temp
+![image](https://github.com/4aiman/slowcam/assets/2913210/3dd7c915-1d9a-4a56-82e1-c51c2442deae) RTX 4070 temp
 
-GreenCam is **a virtual green backdrop** for OBS Studio. Yep! You are not crazy. It basically replaces every thing around you by green color. So that you can use the Chroma Key filter in OBS Studio to put yourself in any other video. GreenCam is powered by a machine learning technology called [Tensorflow](https://github.com/tensorflow/tfjs) and its public model [BodyPix](https://github.com/tensorflow/tfjs-models/tree/master/body-pix).
 
-I do a lot of live streaming at home. There is a small living room, a lot of messy stuffs that needs to hide, not much spaces (and *budget) to setup a standard professional studio. I found there are some applications, like XSplit VCam or Chroma Cam, which removes/changes the background of your video, but I don't want to pay them since I can do exactly the same thing for FREE!!
+GPU utilization alone:<br>
+![image](https://github.com/4aiman/slowcam/assets/2913210/1824eb17-8e4b-48bd-a9e8-f89a0a54009e)
 
-![Demo GreenCam](docs/images/demo-GreenCam01.gif)
 
-## How to use GreenCam with OBS Studio
-
+## How to use
 
 ### Follow steps below to setup:
-You have 2 ways to use GreenCam, with some trading-offs
+Before you start: [![Check this](https://api.netlify.com/api/v1/badges/4ccf5f3b-b414-4da1-bf50-97955adbd300/deploy-status)](https://greencam.netlify.app) will show you how even with RTX4070 it's lagging like hell
 
-1. 🚲[The easy way](docs/the-easiest-way-to-use-greencam.md)
-2. 🏍️[The hard way](docs/how-to-use-browser-in-obs.md)
-
-**Congrats!** You have your new webcam with background removed.
-
-## Development
-
-**Prerequisite**
-
-I tested GreenCam with my OBS Studio 26. But you should able to run GreenCam in any version support Browser plugin.
-
-- OBS Studio with Browser plugin enabled
-- NodeJS Erbium (12 LTS) or later
-- A webcam
-
-**Contribute your idea**
-
-You need install GreenCam's dependencies first
+Install locally if it somehow runs fine for you:
 ```
 $ npm install
 ```
-GreenCam is written in vanilla Javascript, you don't need to build/transpile any thing.
-Open `index.html` in your favorite browser and make some change as you wish.
+I had node v21, so this popped out:<br>
+![image](https://github.com/4aiman/slowcam/assets/2913210/af6a234b-1010-4b3c-a3d6-e0321da40636)<br>
 
-✌️ All Pull Requests are welcome!!
+To fix that run:
+```
+$ npm audit fix --force
+```
+![image](https://github.com/4aiman/slowcam/assets/2913210/53e043ea-4571-4707-9f02-3a8bb00b1077)
 
-**Road-map**
-
-It is a hack I did at the midnight, then some errors or incompatible problems will happens in your machine. Also, there are a lot of features that may be included in next version of GreenCam, like:
-
-- [ ] ⬆Top priority, to improve `initMLModel()` and `transformFrame()` which is the bottle-neck for video output frame-rate
-- [x] Add an editor that can run in browser to test customized parameters and generate a link to run in OBS
-- [ ] Custom background color, video
-
+Nw just open in a browser:
+```
+$ chrome index.html
+```
+Slowcam is written in vanilla Javascript, you don't need to build/transpile any thing.
+Opening the `index.html` in your favorite browser is what makes it run.
